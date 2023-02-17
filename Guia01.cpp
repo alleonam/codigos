@@ -1,5 +1,5 @@
 /*
- * Guia01 - v1.4. - 16 / 02 / 2023
+ * Guia01 - v1.5. - 16 / 02 / 2023
  * Author: Manoella Santos Diniz
  */
 
@@ -30,9 +30,10 @@ void decorateWorld(const char *fileName)
     }
 
     // colocar um marcador no mundo
-    world->set(2, 3, BEEPER);
-    world->set(6, 3, BEEPER);
-    world->set(3, 7, BEEPER);
+    for (i = 0; i < 6; i++)
+    {
+        world->set(4, 3, BEEPER);
+    }
 
     // salvar a configuracao atual do mundo
     world->save(fileName);
@@ -117,33 +118,52 @@ public:
         int i;
 
         // especificar acoes da tarefa
-        move();
         turnLeft();
-        moveN(2);
-
-        if (nextToABeeper())
-            pickBeeper();
-
-        moveN(4);
+        moveN(6);
+        turnRight();
+        moveN(5);
         turnRight();
         move();
-
-        if (nextToABeeper())
-            pickBeeper();
-
-        moveN(3);
         turnRight();
-        moveN(4);
+        moveN(2);
+        turnLeft();
+        moveN(3);
         turnAround();
 
-        if (nextToABeeper())
+        while (nextToABeeper())
+        {
             pickBeeper();
+        }
 
         moveN(3);
-        turnLeft();
+        turnRight();
         moveN(2);
-        turnLeft();
+        turnRight();
         moveN(3);
+        turnAround();
+
+        if (nbeepers() > 0)
+            putBeeper();
+
+        for (i = 0; i < 3; i++)
+        {
+            moveN(4);
+            turnLeft();
+        }
+
+        turnLeft();
+
+        if (nbeepers() > 0)
+        {
+            for (i = 0; i < 2; i++)
+            {
+                putBeeper();
+            }
+        }
+
+        moveN(4);
+        turnRight();
+        move();
         turnAround();
 
         while (nbeepers() > 0)
@@ -151,17 +171,10 @@ public:
             putBeeper();
         }
 
-        moveN(3);
-        turnRight();
         moveN(2);
-
-        for (i = 0; i < 2; i++)
-        {
-            turnRight();
-            moveN(5);
-        }
-
-        turnAround();
+        turnLeft();
+        moveN(6);
+        turnLeft();
 
         // encerrar
         turnOff(); // desligar-se
@@ -182,12 +195,12 @@ int main()
     //       antes de qualquer outra coisa
     //       (depois de criado, podera' ser comentado)
     world->create(""); // criar o mundo
-    decorateWorld("Guia0114.txt");
+    decorateWorld("Guia0115.txt");
     world->show();
 
     // preparar o ambiente para uso
     world->reset();              // limpar configuracoes
-    world->read("Guia0114.txt"); // ler configuracao atual para o ambiente
+    world->read("Guia0115.txt"); // ler configuracao atual para o ambiente
     world->show();               // mostrar a configuracao atual
 
     set_Speed(3); // definir velocidade padrao
@@ -233,6 +246,10 @@ int main()
  * v1.4 - 01. o robo ira deslocar, desviar das
  *            paredes e pegar o marcador
  *
+ * v1.5 - 01. o robo ira deslocar, desviar das
+ *            paredes, pegar os marcadores e
+ *            colocar nas posicoes indicadas
+ *
  * ---------------------------------------------- historico
  *
  * Versao   Data    Modificacao
@@ -250,6 +267,7 @@ int main()
  * 1.2      16/02   novo conjunto de acoes
  * 1.3      16/02   novo conjunto de acoes
  * 1.4      16/02   criacao de uma caixa
+ * 1.5      16/02   caixa com mais marcadores
  *
  * ---------------------------------------------- testes
  *
@@ -269,5 +287,6 @@ int main()
  * 1.2      01. ( OK )  teste das novas acoes
  * 1.3      01. ( OK )  teste das novas acoes
  * 1.4      01. ( OK )  teste da caixa
+ * 1.5      01. ( OK )  teste da caixa com multiplos marcadores
  *
  */
