@@ -1,5 +1,5 @@
 /*
- * Guia01 - v0.6. - 16 / 02 / 2023
+ * Guia01 - v0.7. - 16 / 02 / 2023
  * Author: Manoella Santos Diniz
  */
 
@@ -85,9 +85,19 @@ public:
         // especificar acoes da tarefa
         doPartialTask();
         doPartialTask();
-        pickBeeper(); // apanhar marcador
+        // testar se ha' marcador antes ...
+        if (nextToABeeper())
+        {
+            // ... de tentar carrega-lo
+            pickBeeper();
+        }
         doPartialTask();
-        putBeeper(); // colocar marcador
+        // testar se carrega marcador antes ...
+        if (beepersInBag())
+        {
+            // ... de tentar descarrega-lo
+            putBeeper();
+        }
         doPartialTask();
         turnLeft();
 
@@ -110,12 +120,12 @@ int main()
     //       antes de qualquer outra coisa
     //       (depois de criado, podera' ser comentado)
     world->create(""); // criar o mundo
-    decorateWorld("Guia0106.txt");
+    decorateWorld("Guia0107.txt");
     world->show();
 
     // preparar o ambiente para uso
     world->reset();              // limpar configuracoes
-    world->read("Guia0106.txt"); // ler configuracao atual para o ambiente
+    world->read("Guia0107.txt"); // ler configuracao atual para o ambiente
     world->show();               // mostrar a configuracao atual
 
     set_Speed(3); // definir velocidade padrao
@@ -157,6 +167,7 @@ int main()
  * 0.4      16/02   adicao do metodo pickBeeper()
  * 0.5      16/02   adicao do metodo putBeeper()
  * 0.6      16/02   adicao do metodo moveN()
+ * 0.7      16/02   testes dos marcadores com o metodo beepersInBag()
  *
  * ---------------------------------------------- testes
  *
@@ -167,5 +178,7 @@ int main()
  * 0.4      01. ( OK )  teste do apanhar marcador
  * 0.5      01. ( OK )  teste do colocar marcador
  * 0.6      01. ( OK )  teste da repeticao do movimento
+ * 0.7      01. ( OK )  teste com marcador na posicao (4, 4)
+ *          02. ( OK )  teste sem marcador na posicao (4, 4)
  *
  */
