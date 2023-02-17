@@ -1,5 +1,5 @@
 /*
- * Guia01 - v0.7. - 16 / 02 / 2023
+ * Guia01 - v0.8. - 16 / 02 / 2023
  * Author: Manoella Santos Diniz
  */
 
@@ -93,7 +93,7 @@ public:
         }
         doPartialTask();
         // testar se carrega marcador antes ...
-        if (beepersInBag())
+        if (nbeepers() > 0)
         {
             // ... de tentar descarrega-lo
             putBeeper();
@@ -120,12 +120,12 @@ int main()
     //       antes de qualquer outra coisa
     //       (depois de criado, podera' ser comentado)
     world->create(""); // criar o mundo
-    decorateWorld("Guia0107.txt");
+    decorateWorld("Guia0108.txt");
     world->show();
 
     // preparar o ambiente para uso
     world->reset();              // limpar configuracoes
-    world->read("Guia0107.txt"); // ler configuracao atual para o ambiente
+    world->read("Guia0108.txt"); // ler configuracao atual para o ambiente
     world->show();               // mostrar a configuracao atual
 
     set_Speed(3); // definir velocidade padrao
@@ -168,6 +168,7 @@ int main()
  * 0.5      16/02   adicao do metodo putBeeper()
  * 0.6      16/02   adicao do metodo moveN()
  * 0.7      16/02   testes dos marcadores com o metodo beepersInBag()
+ * 0.8      16/02   teste com quantidade
  *
  * ---------------------------------------------- testes
  *
@@ -180,5 +181,6 @@ int main()
  * 0.6      01. ( OK )  teste da repeticao do movimento
  * 0.7      01. ( OK )  teste com marcador na posicao (4, 4)
  *          02. ( OK )  teste sem marcador na posicao (4, 4)
+ * 0.8      01. ( OK )  teste com a quantidade de marcadores
  *
  */
