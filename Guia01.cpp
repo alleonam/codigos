@@ -1,5 +1,5 @@
 /*
- * Guia01 - v1.5. - 16 / 02 / 2023
+ * Guia01 - v1.E1. - 16 / 02 / 2023
  * Author: Manoella Santos Diniz
  */
 
@@ -110,6 +110,36 @@ public:
     }
 
     /**
+     * putBeepers - Metodo para colocar varios marcadores de uma so vez.
+     * @param n - quantidade de marcadores
+     */
+    void putBeepers(int n)
+    {
+        while (n > 0)
+        {
+            if (beepersInBag())
+            {
+                putBeeper();
+                n--;
+            }
+        }
+    }
+
+    /**
+     * pickBeepers - Metodo para pegar varios marcadores de uma so vez.
+     * @param n - quantidade de marcadores
+     */
+    void pickBeepers(int n)
+    {
+        while (n > 0)
+        {
+            if (nextToABeeper())
+                pickBeeper();
+            n--;
+        }
+    }
+
+    /**
      * doTask - Relacao de acoes para qualquer robo executar.
      */
     void doTask()
@@ -129,48 +159,24 @@ public:
         turnLeft();
         moveN(3);
         turnAround();
-
-        while (nextToABeeper())
-        {
-            pickBeeper();
-        }
-
+        pickBeepers(6);
         moveN(3);
         turnRight();
         moveN(2);
         turnRight();
         moveN(3);
-        turnAround();
-
-        if (nbeepers() > 0)
-            putBeeper();
-
-        for (i = 0; i < 3; i++)
-        {
-            moveN(4);
-            turnLeft();
-        }
-
-        turnLeft();
-
-        if (nbeepers() > 0)
-        {
-            for (i = 0; i < 2; i++)
-            {
-                putBeeper();
-            }
-        }
-
+        putBeepers(1);
+        move();
+        turnRight();
+        moveN(4);
+        turnRight();
+        move();
+        putBeepers(2);
         moveN(4);
         turnRight();
         move();
         turnAround();
-
-        while (nbeepers() > 0)
-        {
-            putBeeper();
-        }
-
+        putBeepers(3);
         moveN(2);
         turnLeft();
         moveN(6);
@@ -195,12 +201,12 @@ int main()
     //       antes de qualquer outra coisa
     //       (depois de criado, podera' ser comentado)
     world->create(""); // criar o mundo
-    decorateWorld("Guia0115.txt");
+    decorateWorld("Guia01E1.txt");
     world->show();
 
     // preparar o ambiente para uso
     world->reset();              // limpar configuracoes
-    world->read("Guia0115.txt"); // ler configuracao atual para o ambiente
+    world->read("Guia01E1.txt"); // ler configuracao atual para o ambiente
     world->show();               // mostrar a configuracao atual
 
     set_Speed(3); // definir velocidade padrao
@@ -231,6 +237,7 @@ int main()
  *
  * ---------------------------------------------- notas / observacoes / comentarios
  *
+ *
  * ---------------------------------------------- previsao de testes
  *
  * v1.1 - 01. o robo ira deslocar e colocar os
@@ -250,6 +257,15 @@ int main()
  *            paredes, pegar os marcadores e
  *            colocar nas posicoes indicadas
  *
+ * v1.E1 - 01. o robo ira deslocar, desviar das
+ *             paredes, pegar os marcadores e
+ *             colocar nas posicoes indicadas
+ *         02. se os marcadores nao forem
+ *             suficientes, o robo nao ira
+ *             pega-los
+ *         03. mesmo que tenha marcadores sobrando,
+ *             o robo ira deixa-los para tras
+ *
  * ---------------------------------------------- historico
  *
  * Versao   Data    Modificacao
@@ -268,6 +284,7 @@ int main()
  * 1.3      16/02   novo conjunto de acoes
  * 1.4      16/02   criacao de uma caixa
  * 1.5      16/02   caixa com mais marcadores
+ * 1.E1     16/02   procedientos para pegar varios marcadores
  *
  * ---------------------------------------------- testes
  *
@@ -288,5 +305,8 @@ int main()
  * 1.3      01. ( OK )  teste das novas acoes
  * 1.4      01. ( OK )  teste da caixa
  * 1.5      01. ( OK )  teste da caixa com multiplos marcadores
+ * 1.E1     01. ( OK )  teste dos procedimentos putBeepers() e pickBeepers()
+ *          02. ( OK )  teste de tentar pegar mais marcadores
+ *          03. ( OK )  teste de pegar menos marcadores
  *
  */
