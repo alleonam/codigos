@@ -1,5 +1,5 @@
 /*
- * Guia01 - v0.9. - 16 / 02 / 2023
+ * Guia01 - v1.0. - 16 / 02 / 2023
  * Author: Manoella Santos Diniz
  */
 
@@ -57,13 +57,13 @@ public:
      */
     void moveN(int steps)
     {
-        // repetir se a quantidade de passos e' maior que zero
-        while (steps > 0) // outra forma de repetir
+        // definir dado local
+        int step = 0;
+        // repetir contando e testando ate' atingir a quantidade de passos
+        for (step = 1; step <= steps; step = step + 1) // outra forma de repetir
         {
             // dar um passo por vez
             move();
-            // tentar fazer de novo, com menos um passo
-            steps = steps - 1;
         }
     }
 
@@ -120,12 +120,12 @@ int main()
     //       antes de qualquer outra coisa
     //       (depois de criado, podera' ser comentado)
     world->create(""); // criar o mundo
-    decorateWorld("Guia0109.txt");
+    decorateWorld("Guia0110.txt");
     world->show();
 
     // preparar o ambiente para uso
     world->reset();              // limpar configuracoes
-    world->read("Guia0109.txt"); // ler configuracao atual para o ambiente
+    world->read("Guia0110.txt"); // ler configuracao atual para o ambiente
     world->show();               // mostrar a configuracao atual
 
     set_Speed(3); // definir velocidade padrao
@@ -170,6 +170,7 @@ int main()
  * 0.7      16/02   testes dos marcadores com o metodo beepersInBag()
  * 0.8      16/02   teste com quantidade
  * 0.9      16/02   adicao de while() para a repeticao do movimento
+ * 1.0      16/02   adicao de for() para a repeticao do movimento
  *
  * ---------------------------------------------- testes
  *
@@ -184,5 +185,6 @@ int main()
  *          02. ( OK )  teste sem marcador na posicao (4, 4)
  * 0.8      01. ( OK )  teste com a quantidade de marcadores
  * 0.9      01. ( OK )  teste com outra forma de repeticao
+ * 1.0      01. ( OK )  teste com outra forma de alternativa
  *
  */
