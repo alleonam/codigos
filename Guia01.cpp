@@ -139,7 +139,7 @@ int main()
  * 1.3      16/02   novo conjunto de acoes
  * 1.4      16/02   criacao de uma caixa
  * 1.5      16/02   caixa com mais marcadores
- * 1.E1     16/02   procedientos para pegar varios marcadores
+ * 1.E1     16/02   procedimentos para pegar varios marcadores
  * 1.E2     16/02   repeticoes com variacoes crescentes
  * 1.E3     16/02   reuniao das definicoes feitas em MyRobot
  *
