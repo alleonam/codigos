@@ -1,5 +1,5 @@
 /*
- * Guia01 - v0.2. - 16 / 02 / 2023
+ * Guia01 - v0.3. - 16 / 02 / 2023
  * Author: Manoella Santos Diniz
  */
 
@@ -52,23 +52,27 @@ public:
     }
 
     /**
+     * doPartialTask - Metodo para descrever parte de uma tarefa.
+     */
+    void doPartialTask()
+    {
+        // especificar acoes dessa parte da tarefa
+        move();
+        move();
+        move();
+        turnLeft();
+    }
+
+    /**
      * doTask - Relacao de acoes para qualquer robo executar.
      */
     void doTask()
     {
         // especificar acoes da tarefa
-        move();
-        move();
-        turnLeft();
-        move();
-        move();
-        turnLeft();
-        move();
-        move();
-        turnLeft();
-        move();
-        move();
-        turnLeft();
+        doPartialTask();
+        doPartialTask();
+        doPartialTask();
+        doPartialTask();
         turnLeft();
 
         // encerrar
@@ -90,12 +94,12 @@ int main()
     //       antes de qualquer outra coisa
     //       (depois de criado, podera' ser comentado)
     world->create(""); // criar o mundo
-    decorateWorld("Guia0102.txt");
+    decorateWorld("Guia0103.txt");
     world->show();
 
     // preparar o ambiente para uso
     world->reset();              // limpar configuracoes
-    world->read("Guia0102.txt"); // ler configuracao atual para o ambiente
+    world->read("Guia0103.txt"); // ler configuracao atual para o ambiente
     world->show();               // mostrar a configuracao atual
 
     set_Speed(3); // definir velocidade padrao
@@ -133,11 +137,13 @@ int main()
  * Versao   Data    Modificacao
  * 0.1      16/02   esboco
  * 0.2      16/02   adicao do metodo doTask()
+ * 0.3      16/02   adicao do metodo doPartialTask()
  *
  * ---------------------------------------------- testes
  *
  * Versao   Teste
  * 0.1      01. ( OK )  teste inicial
  * 0.2      01. ( OK )  teste da tarefa
+ * 0.3      01. ( OK )  teste da tarefa parcial
  *
  */
