@@ -1,5 +1,5 @@
 /*
- * Guia01 - v0.5. - 16 / 02 / 2023
+ * Guia01 - v0.6. - 16 / 02 / 2023
  * Author: Manoella Santos Diniz
  */
 
@@ -52,14 +52,28 @@ public:
     }
 
     /**
+     * moveN - Metodo para mover certa quantidade de passos.
+     * @param steps - passos a serem dados.
+     */
+    void moveN(int steps)
+    {
+        // testar se a quantidade de passos e' maior que zero
+        if (steps > 0)
+        {
+            // dar um passo
+            move();
+            // tentar fazer de novo, com menos um passo dessa vez
+            moveN(steps - 1);
+        }
+    }
+
+    /**
      * doPartialTask - Metodo para descrever parte de uma tarefa.
      */
     void doPartialTask()
     {
         // especificar acoes dessa parte da tarefa
-        move();
-        move();
-        move();
+        moveN(3);
         turnLeft();
     }
 
@@ -96,12 +110,12 @@ int main()
     //       antes de qualquer outra coisa
     //       (depois de criado, podera' ser comentado)
     world->create(""); // criar o mundo
-    decorateWorld("Guia0105.txt");
+    decorateWorld("Guia0106.txt");
     world->show();
 
     // preparar o ambiente para uso
     world->reset();              // limpar configuracoes
-    world->read("Guia0105.txt"); // ler configuracao atual para o ambiente
+    world->read("Guia0106.txt"); // ler configuracao atual para o ambiente
     world->show();               // mostrar a configuracao atual
 
     set_Speed(3); // definir velocidade padrao
@@ -142,6 +156,7 @@ int main()
  * 0.3      16/02   adicao do metodo doPartialTask()
  * 0.4      16/02   adicao do metodo pickBeeper()
  * 0.5      16/02   adicao do metodo putBeeper()
+ * 0.6      16/02   adicao do metodo moveN()
  *
  * ---------------------------------------------- testes
  *
@@ -151,5 +166,6 @@ int main()
  * 0.3      01. ( OK )  teste da tarefa parcial
  * 0.4      01. ( OK )  teste do apanhar marcador
  * 0.5      01. ( OK )  teste do colocar marcador
+ * 0.6      01. ( OK )  teste da repeticao do movimento
  *
  */
