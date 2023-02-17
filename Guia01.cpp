@@ -1,5 +1,5 @@
 /*
- * Guia01 - v1.E1. - 16 / 02 / 2023
+ * Guia01 - v1.E2. - 16 / 02 / 2023
  * Author: Manoella Santos Diniz
  */
 
@@ -115,13 +115,13 @@ public:
      */
     void putBeepers(int n)
     {
-        while (n > 0)
+        // definir dado local
+        int i;
+
+        for (i = 0; i <= n; i++)
         {
             if (beepersInBag())
-            {
                 putBeeper();
-                n--;
-            }
         }
     }
 
@@ -131,11 +131,13 @@ public:
      */
     void pickBeepers(int n)
     {
-        while (n > 0)
+        // definir dado local
+        int i;
+
+        for (i = 0; i <= n; i++)
         {
             if (nextToABeeper())
                 pickBeeper();
-            n--;
         }
     }
 
@@ -148,6 +150,7 @@ public:
         int i;
 
         // especificar acoes da tarefa
+        putBeepers(3);
         turnLeft();
         moveN(6);
         turnRight();
@@ -201,12 +204,12 @@ int main()
     //       antes de qualquer outra coisa
     //       (depois de criado, podera' ser comentado)
     world->create(""); // criar o mundo
-    decorateWorld("Guia01E1.txt");
+    decorateWorld("Guia01E2.txt");
     world->show();
 
     // preparar o ambiente para uso
     world->reset();              // limpar configuracoes
-    world->read("Guia01E1.txt"); // ler configuracao atual para o ambiente
+    world->read("Guia01E2.txt"); // ler configuracao atual para o ambiente
     world->show();               // mostrar a configuracao atual
 
     set_Speed(3); // definir velocidade padrao
@@ -237,7 +240,6 @@ int main()
  *
  * ---------------------------------------------- notas / observacoes / comentarios
  *
- *
  * ---------------------------------------------- previsao de testes
  *
  * v1.1 - 01. o robo ira deslocar e colocar os
@@ -266,6 +268,9 @@ int main()
  *         03. mesmo que tenha marcadores sobrando,
  *             o robo ira deixa-los para tras
  *
+ * v1.E2 - 01. o robo fara as mesmas acoes
+ *             definidas no programa anterior
+ *
  * ---------------------------------------------- historico
  *
  * Versao   Data    Modificacao
@@ -285,6 +290,7 @@ int main()
  * 1.4      16/02   criacao de uma caixa
  * 1.5      16/02   caixa com mais marcadores
  * 1.E1     16/02   procedientos para pegar varios marcadores
+ * 1.E2     16/02   repeticoes com variacoes crescentes
  *
  * ---------------------------------------------- testes
  *
@@ -308,5 +314,6 @@ int main()
  * 1.E1     01. ( OK )  teste dos procedimentos putBeepers() e pickBeepers()
  *          02. ( OK )  teste de tentar pegar mais marcadores
  *          03. ( OK )  teste de pegar menos marcadores
+ * 1.E2     01. ( OK )  teste das variacoes crescentes
  *
  */
