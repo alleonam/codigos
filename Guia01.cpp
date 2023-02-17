@@ -1,5 +1,5 @@
 /*
- * Guia01 - v1.2. - 16 / 02 / 2023
+ * Guia01 - v1.3. - 16 / 02 / 2023
  * Author: Manoella Santos Diniz
  */
 
@@ -98,10 +98,13 @@ public:
      */
     void doTask()
     {
+        // definir dado local
+        int i;
+
         // especificar acoes da tarefa
         turnLeft();
 
-        for (int i = 0; i < 2; i++)
+        for (i = 0; i < 2; i++)
         {
             moveN(5);
             turnRight();
@@ -115,17 +118,27 @@ public:
 
         if (nextToABeeper())
             pickBeeper();
-
         moveN(3);
+        turnAround();
 
         if (nextToABeeper())
             pickBeeper();
 
-        for (int i = 0; i < 2; i++)
+        moveN(3);
+        turnRight();
+        moveN(2);
+        turnRight();
+
+        for (i = 0; i < 3; i++)
         {
-            moveN(2);
-            turnLeft();
+            if (nbeepers() > 0)
+                putBeeper();
+
+            move();
         }
+
+        moveN(2);
+        turnAround();
 
         // encerrar
         turnOff(); // desligar-se
@@ -146,12 +159,12 @@ int main()
     //       antes de qualquer outra coisa
     //       (depois de criado, podera' ser comentado)
     world->create(""); // criar o mundo
-    decorateWorld("Guia0112.txt");
+    decorateWorld("Guia0113.txt");
     world->show();
 
     // preparar o ambiente para uso
     world->reset();              // limpar configuracoes
-    world->read("Guia0112.txt"); // ler configuracao atual para o ambiente
+    world->read("Guia0113.txt"); // ler configuracao atual para o ambiente
     world->show();               // mostrar a configuracao atual
 
     set_Speed(3); // definir velocidade padrao
@@ -190,6 +203,10 @@ int main()
  * v1.2 - 01. o robo ira deslocar e pegar os
  *            marcadores de acordo com as repeticoes
  *
+ * v1.3 - 01. o robo ira deslocar, pegar os
+ *            marcadores de acordo com as repeticoes
+ *            e colocar nos pontos definidos
+ *
  * ---------------------------------------------- historico
  *
  * Versao   Data    Modificacao
@@ -205,6 +222,7 @@ int main()
  * 1.0      16/02   adicao de for() para a repeticao do movimento
  * 1.1      16/02   novo conjunto de acoes
  * 1.2      16/02   novo conjunto de acoes
+ * 1.3      16/02   novo conjunto de acoes
  *
  * ---------------------------------------------- testes
  *
@@ -222,5 +240,6 @@ int main()
  * 1.0      01. ( OK )  teste com outra forma de alternativa
  * 1.1      01. ( OK )  teste das novas acoes
  * 1.2      01. ( OK )  teste das novas acoes
+ * 1.3      01. ( OK )  teste das novas acoes
  *
  */
