@@ -1,5 +1,5 @@
 /*
- * Guia01 - v1.1. - 16 / 02 / 2023
+ * Guia01 - v1.2. - 16 / 02 / 2023
  * Author: Manoella Santos Diniz
  */
 
@@ -14,6 +14,11 @@
 */
 void decorateWorld(const char *fileName)
 {
+    // colocar um marcador no mundo
+    world->set(3, 3, BEEPER);
+    world->set(6, 3, BEEPER);
+    world->set(6, 6, BEEPER);
+
     // salvar a configuracao atual do mundo
     world->save(fileName);
 }
@@ -94,24 +99,31 @@ public:
     void doTask()
     {
         // especificar acoes da tarefa
-        moveN(2);
         turnLeft();
-        moveN(2);
-        turnRight();
-
-        for (int i = 0; i < 2; i++)
-        {
-            if (beepersInBag())
-                putBeeper();
-            doPartialTask();
-        }
-
-        if (beepersInBag())
-            putBeeper();
 
         for (int i = 0; i < 2; i++)
         {
             moveN(5);
+            turnRight();
+        }
+
+        if (nextToABeeper())
+            pickBeeper();
+
+        moveN(3);
+        turnRight();
+
+        if (nextToABeeper())
+            pickBeeper();
+
+        moveN(3);
+
+        if (nextToABeeper())
+            pickBeeper();
+
+        for (int i = 0; i < 2; i++)
+        {
+            moveN(2);
             turnLeft();
         }
 
@@ -134,12 +146,12 @@ int main()
     //       antes de qualquer outra coisa
     //       (depois de criado, podera' ser comentado)
     world->create(""); // criar o mundo
-    decorateWorld("Guia0111.txt");
+    decorateWorld("Guia0112.txt");
     world->show();
 
     // preparar o ambiente para uso
     world->reset();              // limpar configuracoes
-    world->read("Guia0111.txt"); // ler configuracao atual para o ambiente
+    world->read("Guia0112.txt"); // ler configuracao atual para o ambiente
     world->show();               // mostrar a configuracao atual
 
     set_Speed(3); // definir velocidade padrao
@@ -149,7 +161,7 @@ int main()
 
     // posicionar robo no ambiente (situacao inicial):
     // posicao(x=1,y=1), voltado para direita, com zero marcadores, nome escolhido )
-    robot->create(1, 1, EAST, 3, "Karel");
+    robot->create(1, 1, EAST, 0, "Karel");
 
     // executar tarefa
     robot->doTask();
@@ -175,6 +187,9 @@ int main()
  * v1.1 - 01. o robo ira deslocar e colocar os
  *            marcadores de acordo com as repeticoes
  *
+ * v1.2 - 01. o robo ira deslocar e pegar os
+ *            marcadores de acordo com as repeticoes
+ *
  * ---------------------------------------------- historico
  *
  * Versao   Data    Modificacao
@@ -189,6 +204,7 @@ int main()
  * 0.9      16/02   adicao de while() para a repeticao do movimento
  * 1.0      16/02   adicao de for() para a repeticao do movimento
  * 1.1      16/02   novo conjunto de acoes
+ * 1.2      16/02   novo conjunto de acoes
  *
  * ---------------------------------------------- testes
  *
@@ -205,5 +221,6 @@ int main()
  * 0.9      01. ( OK )  teste com outra forma de repeticao
  * 1.0      01. ( OK )  teste com outra forma de alternativa
  * 1.1      01. ( OK )  teste das novas acoes
+ * 1.2      01. ( OK )  teste das novas acoes
  *
  */
