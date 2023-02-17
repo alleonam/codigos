@@ -1,5 +1,5 @@
 /*
- * Guia01 - v0.4. - 16 / 02 / 2023
+ * Guia01 - v0.5. - 16 / 02 / 2023
  * Author: Manoella Santos Diniz
  */
 
@@ -73,6 +73,7 @@ public:
         doPartialTask();
         pickBeeper(); // apanhar marcador
         doPartialTask();
+        putBeeper(); // colocar marcador
         doPartialTask();
         turnLeft();
 
@@ -95,12 +96,12 @@ int main()
     //       antes de qualquer outra coisa
     //       (depois de criado, podera' ser comentado)
     world->create(""); // criar o mundo
-    decorateWorld("Guia0104.txt");
+    decorateWorld("Guia0105.txt");
     world->show();
 
     // preparar o ambiente para uso
     world->reset();              // limpar configuracoes
-    world->read("Guia0104.txt"); // ler configuracao atual para o ambiente
+    world->read("Guia0105.txt"); // ler configuracao atual para o ambiente
     world->show();               // mostrar a configuracao atual
 
     set_Speed(3); // definir velocidade padrao
@@ -140,6 +141,7 @@ int main()
  * 0.2      16/02   adicao do metodo doTask()
  * 0.3      16/02   adicao do metodo doPartialTask()
  * 0.4      16/02   adicao do metodo pickBeeper()
+ * 0.5      16/02   adicao do metodo putBeeper()
  *
  * ---------------------------------------------- testes
  *
@@ -148,5 +150,6 @@ int main()
  * 0.2      01. ( OK )  teste da tarefa
  * 0.3      01. ( OK )  teste da tarefa parcial
  * 0.4      01. ( OK )  teste do apanhar marcador
+ * 0.5      01. ( OK )  teste do colocar marcador
  *
  */
