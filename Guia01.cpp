@@ -1,5 +1,5 @@
 /*
- * Guia01 - v1.0. - 16 / 02 / 2023
+ * Guia01 - v1.1. - 16 / 02 / 2023
  * Author: Manoella Santos Diniz
  */
 
@@ -14,13 +14,6 @@
 */
 void decorateWorld(const char *fileName)
 {
-    // colocar paredes no mundo
-    world->set(4, 4, HWALL); // horizontal
-    world->set(4, 4, VWALL); // vertical
-
-    // colocar um marcador no mundo
-    world->set(4, 4, BEEPER);
-
     // salvar a configuracao atual do mundo
     world->save(fileName);
 }
@@ -45,9 +38,27 @@ public:
         {
             // o agente que executar esse metodo
             // devera' virar tres vezes 'a esquerda
-            turnLeft();
-            turnLeft();
-            turnLeft();
+            for (int i = 0; i < 3; i++)
+            {
+                turnLeft();
+            }
+        }
+    }
+
+    /**
+     * turnAround - Procedimento para dar meia volta.
+     */
+    void turnAround()
+    {
+        // testar se o robo esta' ativo
+        if (checkStatus())
+        {
+            // o agente que executar esse metodo
+            // devera' virar tres vezes 'a esquerda
+            for (int i = 0; i < 2; i++)
+            {
+                turnLeft();
+            }
         }
     }
 
@@ -83,23 +94,26 @@ public:
     void doTask()
     {
         // especificar acoes da tarefa
-        doPartialTask();
-        doPartialTask();
-        // testar se ha' marcador antes ...
-        if (nextToABeeper())
-        {
-            // ... de tentar carrega-lo
-            pickBeeper();
-        }
-        doPartialTask();
-        // testar se carrega marcador antes ...
-        if (nbeepers() > 0)
-        {
-            // ... de tentar descarrega-lo
-            putBeeper();
-        }
-        doPartialTask();
+        moveN(2);
         turnLeft();
+        moveN(2);
+        turnRight();
+
+        for (int i = 0; i < 2; i++)
+        {
+            if (beepersInBag())
+                putBeeper();
+            doPartialTask();
+        }
+
+        if (beepersInBag())
+            putBeeper();
+
+        for (int i = 0; i < 2; i++)
+        {
+            moveN(5);
+            turnLeft();
+        }
 
         // encerrar
         turnOff(); // desligar-se
@@ -120,12 +134,12 @@ int main()
     //       antes de qualquer outra coisa
     //       (depois de criado, podera' ser comentado)
     world->create(""); // criar o mundo
-    decorateWorld("Guia0110.txt");
+    decorateWorld("Guia0111.txt");
     world->show();
 
     // preparar o ambiente para uso
     world->reset();              // limpar configuracoes
-    world->read("Guia0110.txt"); // ler configuracao atual para o ambiente
+    world->read("Guia0111.txt"); // ler configuracao atual para o ambiente
     world->show();               // mostrar a configuracao atual
 
     set_Speed(3); // definir velocidade padrao
@@ -135,7 +149,7 @@ int main()
 
     // posicionar robo no ambiente (situacao inicial):
     // posicao(x=1,y=1), voltado para direita, com zero marcadores, nome escolhido )
-    robot->create(1, 1, EAST, 0, "Karel");
+    robot->create(1, 1, EAST, 3, "Karel");
 
     // executar tarefa
     robot->doTask();
@@ -158,6 +172,9 @@ int main()
  *
  * ---------------------------------------------- previsao de testes
  *
+ * v1.1 - 01. o robo ira deslocar e colocar os
+ *            marcadores de acordo com as repeticoes
+ *
  * ---------------------------------------------- historico
  *
  * Versao   Data    Modificacao
@@ -171,6 +188,7 @@ int main()
  * 0.8      16/02   teste com quantidade
  * 0.9      16/02   adicao de while() para a repeticao do movimento
  * 1.0      16/02   adicao de for() para a repeticao do movimento
+ * 1.1      16/02   novo conjunto de acoes
  *
  * ---------------------------------------------- testes
  *
@@ -186,5 +204,6 @@ int main()
  * 0.8      01. ( OK )  teste com a quantidade de marcadores
  * 0.9      01. ( OK )  teste com outra forma de repeticao
  * 1.0      01. ( OK )  teste com outra forma de alternativa
+ * 1.1      01. ( OK )  teste das novas acoes
  *
  */
